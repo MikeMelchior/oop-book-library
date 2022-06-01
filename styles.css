@@ -49,7 +49,34 @@ body, html {
     width: 95%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(250px, 300px));
     gap: 20px;
     padding: 20px;
+    position: relative;
+}
+
+.main > div {
+    display: grid;
+    grid-template-rows: 4fr 1fr 1fr 1fr;
+    background-color: rgb(114, 48, 2);
+    color: antiquewhite;
+    border-left: 6px solid rgb(20, 20, 20);
+    border-radius: 0.3rem;
+    padding: 1rem;
+    box-shadow: 5px 5px 5px 5px rgb(140, 140, 140);
+    position: relative;
+    z-index: 2;
+}
+
+.main > div:hover {
+    transform: scale(1.03);
+}
+
+.main > div > p:first-child {
+    font-weight: 600;
+}
+
+.main > div > p {
+    place-self: center;
+    text-decoration: underline;
 }
