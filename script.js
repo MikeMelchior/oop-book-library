@@ -34,22 +34,21 @@ addBookToLibrary(aCatcherInTheRye);
 
 
 
-function testFunc(e) {
-    console.log(e)
-}
+// function testFunc(e) {
+//     console.log(e)
+// }
+
 function makeHeader() {
     const header = document.createElement('div');
     header.classList.add('header');
     root.appendChild(header);
 }
-makeHeader();
 
 function makeMain() {
     const div = document.createElement('div');
     div.classList.add('main');
     root.appendChild(div);
 }
-makeMain();
 
 function removeMain() {
     let main = document.querySelector('.main');
@@ -107,9 +106,9 @@ function displayBooks() {
     })
 };
 
- displayBooks();
+displayBooks();
 
- function deleteBook(e) {
+function deleteBook(e) {
     console.log(e.target.classList[0].split('-')[1])
     console.log(e.target.offsetParent);
     myLibrary.splice(e.target.classList[0].split('-')[1], 1);
@@ -119,5 +118,11 @@ function displayBooks() {
 }
 
 
-document.querySelector('.add-book').addEventListener('click', testFunc)
+function bookForm(e) {
+    console.log(e)
+    let form = document.querySelector('.book-form');
+    form.classList.add('show-form')
+}
+
+document.querySelector('.add-book').addEventListener('click', bookForm)
 
