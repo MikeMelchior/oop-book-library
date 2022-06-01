@@ -13,6 +13,7 @@ body, html {
     background-color: antiquewhite;
     height: 100%;
     width: 100%;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,19 +46,20 @@ body, html {
     }
 
 .main {
-    height: 90%;
+    height: 100%;
     width: 95%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(250px, 300px));
-    gap: 20px;
+    grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 50px 20px;
     padding: 20px;
     position: relative;
 }
 
 .main > div {
     display: grid;
-    grid-template-rows: 4fr 1fr 1fr 1fr;
+    grid-template-rows: 4fr 1fr 1fr 1fr 1fr;
+    height: 250px;
     background-color: rgb(114, 48, 2);
     color: antiquewhite;
     border-left: 6px solid rgb(20, 20, 20);
@@ -69,14 +71,29 @@ body, html {
 }
 
 .main > div:hover {
-    transform: scale(1.03);
+    transform: scale(1.01);
 }
 
 .main > div > p:first-child {
     font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration: underline;
 }
 
 .main > div > p {
     place-self: center;
-    text-decoration: underline;
+}
+
+.main > div > button {
+    width: fit-content;
+    place-self: center;
+    margin-bottom: -90px;
+    background-color: rgb(100, 50, 50);
+    color: antiquewhite;
+    padding: 3px;
+}
+
+.main > div > button:hover {
+    background-color: red;
+    transform: scale(1.05);
 }
