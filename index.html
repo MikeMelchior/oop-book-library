@@ -12,7 +12,28 @@
     <div class="root">
         <div class="header"></div>
         <div class="main"></div>
-        <div class="book-form"></div>
+        <div class="book-form">
+            <span>
+                <label for="book-title">Book Title:</label>
+                <input type="text" id="book-title" name="book-title" required>
+            </span>
+            <span>
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" required>
+            </span>
+            <span>
+                <label for="page-count">No. of Pages:</label>
+                <input type="number" id="page-count" name="page-count" min="1" required>
+            </span>
+            <span>
+                <label for="have-read">Have you read this book?</label>
+                <select name="have-read" id="have-read">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </span>
+            <button id="form-button">Add Book</button>
+        </div>
     </div>
     
 </body>
