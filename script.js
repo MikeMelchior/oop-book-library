@@ -134,14 +134,19 @@ function deleteBook(e) {
 }
 
 function toggleRead(e) {
-    let readStatus = myLibrary[e.target.classList[0].split('-')[1]].haveRead;
-    console.log(e)
-    if (readStatus == 'Have read') {
-        myLibrary[e.target.classList[0].split('-')[1]].haveRead = "Haven't read"
+    // use book's class (ex: book-2) to find index in library
+    let index = e.target.classList[0].split('-')[1];
+
+    let readStatusText = document.querySelector(`.book-${index}>div>p:last-child`)
+
+    //toggle object's 'read' status and book's text content
+    if (readStatusText.textContent == 'Have read') {
+        myLibrary[index].haveRead = "Haven't read"
+        readStatusText.textContent = "Haven't read"
     } else {
-        myLibrary[e.target.classList[0].split('-')[1]].haveRead = "Have read"
+        myLibrary[index].haveRead = "Have read"
+        readStatusText.textContent = "Have read"
     }
-    
 }
 
 
