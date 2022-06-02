@@ -4,7 +4,6 @@ let myLibrary = [];
 const root = document.querySelector('.root');
 
 
-
 function Book(title, author, pages, haveRead) {
     this.title = title;
     this.author = author;
@@ -12,7 +11,7 @@ function Book(title, author, pages, haveRead) {
     if (haveRead) {
         this.haveRead = 'Have read'
     } else {
-        this.haveRead = 'Have not read'
+        this.haveRead = "Haven't read"
     }
 }
 
@@ -31,7 +30,9 @@ addBookToLibrary(aCatcherInTheRye);
 
 
 
-
+/* Below two functions are used for my janky way of updating the display.
+Remove everything from display and then replace main with fresh empty container
+and then run displayBooks func to add updated list of books w/ buttons to display */
 function makeMain() {
     const div = document.createElement('div');
     div.classList.add('main');
@@ -42,6 +43,7 @@ function removeMain() {
     let main = document.querySelector('.main');
     root.removeChild(main);
 }
+
 
 function addHeaderContent() {
     const button = document.createElement('button');
@@ -66,13 +68,16 @@ function displayBooks() {
     myLibrary.forEach(book => {
         let bookNumber = myLibrary.indexOf(book);
 
+        //create book card
         const div = document.createElement('div');
         div.classList.add(`book-${bookNumber}`);
 
+        //create book section
         const upperDiv = document.createElement('div')
         upperDiv.classList.add('book');
         div.appendChild(upperDiv);
 
+        //create 'book cover' text
         let para = document.createElement('p');
         para.textContent = book.title;
         upperDiv.appendChild(para);
@@ -86,37 +91,57 @@ function displayBooks() {
         para.textContent = book.haveRead;
         upperDiv.appendChild(para);
 
+        //create div for option buttons (delete, toggle read)
         const lowerDiv = document.createElement('div');
-        lowerDiv.classList.add('book-buttons')
-        div.appendChild(lowerDiv)
+        lowerDiv.classList.add('book-buttons');
+        div.appendChild(lowerDiv);
 
+        //create delete button
         let button = document.createElement('button');
-        button.classList.add(`button-${bookNumber}`)
-        button.textContent = 'Remove Book'
+        button.classList.add(`delete-${bookNumber}`);
+        button.textContent = 'Remove Book';
         lowerDiv.appendChild(button);
 
+        //create read toggle button
         button = document.createElement('button');
-        button.classList.add('read-toggle-button');
+        button.classList.add(`read-${bookNumber}`);
         button.textContent = 'Toggle read';
-        lowerDiv.appendChild(button)
+        lowerDiv.appendChild(button);
 
-        const main = document.querySelector('.main')
+        //append entire card to main
+        const main = document.querySelector('.main');
         main.appendChild(div);   
 
-        let deleteButton = document.querySelector(`.button-${bookNumber}`);
+        //add delete button functionality
+        let deleteButton = document.querySelector(`.delete-${bookNumber}`);
         deleteButton.addEventListener('click', deleteBook)
+
+        //add toggle button functionality
+        let readToggleButton = document.querySelector(`.read-${bookNumber}`);
+        readToggleButton.addEventListener('click', toggleRead)
+
     })
 };
-
 displayBooks();
 
 function deleteBook(e) {
-    console.log(e.target.classList[0].split('-')[1])
-    console.log(e.target.offsetParent);
+    //below line of code splices book out of library using classlist to determine index
+    //indices then get refreshed upon calling displayBooks
     myLibrary.splice(e.target.classList[0].split('-')[1], 1);
     removeMain();
     makeMain();
     displayBooks();
+}
+
+function toggleRead(e) {
+    let readStatus = myLibrary[e.target.classList[0].split('-')[1]].haveRead;
+    console.log(e)
+    if (readStatus == 'Have read') {
+        myLibrary[e.target.classList[0].split('-')[1]].haveRead = "Haven't read"
+    } else {
+        myLibrary[e.target.classList[0].split('-')[1]].haveRead = "Have read"
+    }
+    
 }
 
 
