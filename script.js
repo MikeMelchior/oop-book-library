@@ -32,18 +32,6 @@ addBookToLibrary(aCatcherInTheRye);
 
 
 
-
-
-// function testFunc(e) {
-//     console.log(e)
-// }
-
-function makeHeader() {
-    const header = document.createElement('div');
-    header.classList.add('header');
-    root.appendChild(header);
-}
-
 function makeMain() {
     const div = document.createElement('div');
     div.classList.add('main');
@@ -77,26 +65,40 @@ addHeaderContent();
 function displayBooks() {
     myLibrary.forEach(book => {
         let bookNumber = myLibrary.indexOf(book);
+
         const div = document.createElement('div');
         div.classList.add(`book-${bookNumber}`);
 
+        const upperDiv = document.createElement('div')
+        upperDiv.classList.add('book');
+        div.appendChild(upperDiv);
+
         let para = document.createElement('p');
         para.textContent = book.title;
-        div.appendChild(para);
+        upperDiv.appendChild(para);
         para = document.createElement('p');
         para.textContent = book.author;
-        div.appendChild(para);
+        upperDiv.appendChild(para);
         para = document.createElement('p');
         para.textContent = book.pages;
-        div.appendChild(para);
+        upperDiv.appendChild(para);
         para = document.createElement('p');
         para.textContent = book.haveRead;
-        div.appendChild(para);
+        upperDiv.appendChild(para);
+
+        const lowerDiv = document.createElement('div');
+        lowerDiv.classList.add('book-buttons')
+        div.appendChild(lowerDiv)
 
         let button = document.createElement('button');
         button.classList.add(`button-${bookNumber}`)
         button.textContent = 'Remove Book'
-        div.appendChild(button);
+        lowerDiv.appendChild(button);
+
+        button = document.createElement('button');
+        button.classList.add('read-toggle-button');
+        button.textContent = 'Toggle read';
+        lowerDiv.appendChild(button)
 
         const main = document.querySelector('.main')
         main.appendChild(div);   
@@ -121,7 +123,7 @@ function deleteBook(e) {
 function bookForm(e) {
     console.log(e)
     let form = document.querySelector('.book-form');
-    form.classList.add('show-form')
+    form.classList.toggle('show-form')
 }
 
 document.querySelector('.add-book').addEventListener('click', bookForm)
