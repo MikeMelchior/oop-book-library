@@ -54,8 +54,8 @@ function addHeaderContent() {
 
     const header = document.querySelector('.header');
 
-    button.textContent = 'Add Book';
-    headerTitle.textContent = 'Books Library';
+    button.textContent = '+ New Book';
+    headerTitle.textContent = 'Library';
 
     header.appendChild(headerTitle);
     header.appendChild(button);
@@ -65,6 +65,8 @@ addHeaderContent();
 
 
 function displayBooks() {
+    removeMain();
+    makeMain();
     myLibrary.forEach(book => {
         let bookNumber = myLibrary.indexOf(book);
 
@@ -120,6 +122,8 @@ function displayBooks() {
         let readToggleButton = document.querySelector(`.read-${bookNumber}`);
         readToggleButton.addEventListener('click', toggleRead)
 
+        
+
     })
 };
 displayBooks();
@@ -128,8 +132,6 @@ function deleteBook(e) {
     //below line of code splices book out of library using classlist to determine index
     //indices then get refreshed upon calling displayBooks
     myLibrary.splice(e.target.classList[0].split('-')[1], 1);
-    removeMain();
-    makeMain();
     displayBooks();
 }
 
@@ -150,11 +152,46 @@ function toggleRead(e) {
 }
 
 
-function bookForm(e) {
-    console.log(e)
+function showBookForm(e) {
     let form = document.querySelector('.book-form');
-    form.classList.toggle('show-form')
+    form.classList.add('show-form');
 }
 
-document.querySelector('.add-book').addEventListener('click', bookForm)
+document.querySelector('.add-book').addEventListener('click', showBookForm)
 
+
+
+
+function hideBookForm() {
+    let form = document.querySelector('.book-form');
+    form.classList.remove('show-form');
+}
+
+function addBook() {
+    let title = document.querySelector('#book-title').value;
+    let author = document.querySelector('#author').value;
+    let pageCount = document.querySelector('#page-count').value;
+    let read = document.querySelector('#have-read').value;
+
+    if (read == 'yes') {
+        read = true;
+    } else {
+        read = false;
+    };
+
+    let newTitle = '';
+    for (let word of title.split(' ')) {
+        newTitle += word;
+    }
+
+    let newBook = new Book(newTitle, author, pageCount, read)
+    addBookToLibrary(newBook);
+    document.querySelector('#book-title').value = '';
+    document.querySelector('#author').value = '';
+    document.querySelector('#page-count').value = '';
+    hideBookForm();
+    displayBooks();
+}
+
+
+document.querySelector('#form-button').addEventListener('click', addBook)
