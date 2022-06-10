@@ -4,14 +4,27 @@ let myLibrary = [];
 const root = document.querySelector('.root');
 
 
-function Book(title, author, pages, haveRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = `${pages} pages`;
-    if (haveRead) {
-        this.haveRead = 'Have read'
-    } else {
-        this.haveRead = "Haven't read"
+// function Book(title, author, pages, haveRead) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = `${pages} pages`;
+//     if (haveRead) {
+//         this.haveRead = 'Have read'
+//     } else {
+//         this.haveRead = "Haven't read"
+//     }
+// }
+
+class Book {
+    constructor(title, author, pages, haveRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        if(haveRead) {
+            this.haveRead = "Have read"
+        } else {
+            this.haveRead = "Haven't read"
+        }
     }
 }
 
